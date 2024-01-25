@@ -1,0 +1,87 @@
+{
+  "beverages": [
+    {
+      "coke": {
+        "name": "Coca Cola",
+        "id": "000001",
+        "cups": [
+          {
+            "size": "S",
+            "name": "Small",
+            "defaultRate": 50,
+            "quantity": 250,
+            "price": 3
+          },
+          {
+            "size": "M",
+            "name": "Medium",
+            "defaultRate": 50,
+            "quantity": 330,
+            "price": 4.4
+          },
+          {
+            "size": "L",
+            "name": "Large",
+            "defaultRate": 70,
+            "quantity": 500,
+            "price": 5.6
+          }
+        ]
+      },
+      "diet-coke": {
+        "name": "Diet Coke",
+        "id": "000001",
+        "cups": [
+          {
+            "size": "S",
+            "name": "Small",
+            "defaultRate": 50,
+            "quantity": 250,
+            "price": 3
+          },
+          {
+            "size": "M",
+            "name": "Medium",
+            "defaultRate": 50,
+            "quantity": 330,
+            "price": 4.4
+          },
+          {
+            "size": "L",
+            "name": "Large",
+            "defaultRate": 70,
+            "quantity": 500,
+            "price": 5.6
+          }
+        ]
+      },
+      "sprite": {
+        "name": "Sprite",
+        "id": "000001",
+        "cups": [
+          {
+            "size": "S",
+            "name": "Small",
+            "defaultRate": 50,
+            "quantity": 250,
+            "price": 3
+          },
+          {
+            "size": "M",
+            "name": "Medium",
+            "defaultRate": 50,
+            "quantity": 330,
+            "price": 4.4
+          },
+          {
+            "size": "L",
+            "name": "Large",
+            "defaultRate": 70,
+            "quantity": 500,
+            "price": 5.6
+          }
+        ]
+      }
+    }
+  ]
+}
