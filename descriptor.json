@@ -1,0 +1,8 @@
+{
+  "kos": {
+    "app": {
+      "appClass": "com.example.KosHelloWorld",
+      "appId": "system"
+    }
+  }
+}
