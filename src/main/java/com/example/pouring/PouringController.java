@@ -1,6 +1,6 @@
 package com.example.pouring;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.beverage.Beverage;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,12 +11,8 @@ import com.tccc.kos.commons.core.dispatcher.annotations.RequestBody;
 import com.tccc.kos.commons.util.concurrent.future.FutureWork;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.ResourceBundle;
 
 @Slf4j
 @ApiController(base = "/selectandpour", title = "PouringController ")
@@ -51,7 +47,7 @@ public class PouringController {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        final String jsonFilename = "coke-demo-prices.json";
+        final String jsonFilename = "cups.json";
 
         try(InputStream in = getClass().getClassLoader().getResourceAsStream(jsonFilename)) {
             log.debug("Reading json file: " + jsonFilename);

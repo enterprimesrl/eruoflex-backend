@@ -1,5 +1,6 @@
 package com.example.pouring;
 
+import com.example.beverage.Beverage;
 import com.tccc.kos.commons.core.service.AbstractConfigurableService;
 import com.tccc.kos.commons.util.concurrent.future.FutureWork;
 

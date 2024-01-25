@@ -1,0 +1,20 @@
+[
+    {
+      "key": "S",
+      "name": "Small",
+      "defaultRate": 50,
+      "volume": 250
+    },
+    {
+      "key": "M",
+      "name": "Medium",
+      "defaultRate": 50,
+      "volume": 330
+    },
+    {
+      "key": "L",
+      "name": "Large",
+      "defaultRate": 70,
+      "volume": 500
+    }
+]

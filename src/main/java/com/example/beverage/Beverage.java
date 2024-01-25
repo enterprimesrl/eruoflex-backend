@@ -1,4 +1,4 @@
-package com.example.pouring;
+package com.example.beverage;
 
 import lombok.Data;
 
@@ -9,5 +9,5 @@ public class Beverage {
     private String id;
     private String abbr;
     private String name;
-    private List<Cup> cups;
+    private List<BeverageCup> cups;
 }

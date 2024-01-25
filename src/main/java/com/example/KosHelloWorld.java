@@ -1,5 +1,9 @@
 package com.example;
 
+import com.example.beverage.BeverageController;
+import com.example.beverage.BeverageService;
+import com.example.cup.CupController;
+import com.example.cup.CupService;
 import com.example.pouring.PouringController;
 import com.example.pouring.PouringService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,6 +22,12 @@ public class KosHelloWorld extends SystemApplication<BaseAppConfig> {
 
         getCtx().add(new PouringController());
         getCtx().add(new PouringService());
+
+        getCtx().add(new BeverageController());
+        getCtx().add(new BeverageService());
+
+        getCtx().add(new CupController());
+        getCtx().add(new CupService());
     }
 
     @Override
