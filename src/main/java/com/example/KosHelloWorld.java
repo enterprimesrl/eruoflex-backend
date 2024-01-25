@@ -18,4 +18,21 @@ public class KosHelloWorld extends SystemApplication<BaseAppConfig> {
     public void start(){
         log.info("Start");
     }
+
+    @Override
+    public void started() {
+        log.info("started");
+    }
+
+    @Override
+    public void stop() throws Exception {
+        log.info("stop");
+        super.stop();
+    }
+
+    @Override
+    public void unload() throws Exception {
+        log.info("unload");
+        super.unload();
+    }
 }
