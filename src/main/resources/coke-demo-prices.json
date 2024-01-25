@@ -30,7 +30,7 @@
   {
     "abbr": "diet-coke",
     "name": "Diet Coke",
-    "id": "000001",
+    "id": "000002",
     "cups": [
       {
         "size": "S",
@@ -58,7 +58,7 @@
   {
     "abbr": "sprite",
     "name": "Sprite",
-    "id": "000001",
+    "id": "000003",
     "cups": [
       {
         "size": "S",

@@ -2,6 +2,7 @@ package com.example.pouring;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tccc.kos.commons.core.context.annotations.Autowired;
 import com.tccc.kos.commons.core.dispatcher.annotations.ApiController;
@@ -15,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Slf4j
 @ApiController(base = "/selectandpour", title = "PouringController ")
@@ -47,14 +49,23 @@ public class PouringController {
     @ApiEndpoint(GET ="/beverages", desc = "beverages list")
     public List<Beverage> beverages() {
 
-        try {
-            ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
 
-            InputStream input = new FileInputStream("coke-demo-prices.json");
-            List<Beverage> beverages = mapper.readValue(input, new TypeReference<List<Beverage>>() {});
+        final String jsonFilename = "coke-demo-prices.json";
+
+        try(InputStream in = getClass().getClassLoader().getResourceAsStream(jsonFilename)) {
+            log.debug("Reading json file: " + jsonFilename);
+            log.debug("in: " + in);
+
+            JsonNode jsonNode = mapper.readValue(in, JsonNode.class);
+            String jsonString = mapper.writeValueAsString(jsonNode);
+            log.info(jsonString);
+
+            List<Beverage> beverages = mapper.readValue(jsonString, new TypeReference<List<Beverage>>() {});
             return beverages;
-        } catch (IOException e) {
-            log.info(e.getMessage());
+        }
+        catch(Exception e) {
+            log.error("Error reading json file: " + jsonFilename);
             throw new RuntimeException(e);
         }
     }
