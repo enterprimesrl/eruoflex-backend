@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>kos-hello-world</artifactId>
+    <artifactId>hellokos</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -137,5 +137,15 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>maven.euroflex.repo</id>
+            <url>s3://euflex-repo/release</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven.euroflex.repo</id>
+            <url>s3://euflex-repo/snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
