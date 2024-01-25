@@ -7,10 +7,10 @@ import com.tccc.kos.commons.core.dispatcher.annotations.ApiEndpoint;
 @ApiController(base = "/mycontroller", title = "This is a KOS controller")
 public class MyController {
     @Autowired
-    private MyService myService;
+    private ThemeService themeService;
 
     @ApiEndpoint(GET = "/foo", desc = "This is an endpoint")
     public String foo() {
-        return myService.bar();
+        return themeService.bar();
     }
 }

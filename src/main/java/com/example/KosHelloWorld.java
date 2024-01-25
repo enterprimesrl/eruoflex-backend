@@ -11,7 +11,7 @@ public class KosHelloWorld extends SystemApplication<BaseAppConfig> {
     public void load() {
         log.info("Load");
         getCtx().add(new MyController());
-        getCtx().add(new MyService());
+        getCtx().add( new ThemeService());
     }
 
     @Override
