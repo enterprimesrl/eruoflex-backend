@@ -11,6 +11,11 @@ public class MyController {
 
     @ApiEndpoint(GET = "/foo", desc = "This is an endpoint")
     public String foo() {
+        return themeService.foo();
+    }
+
+    @ApiEndpoint(GET = "/bar", desc = "This is an endpoint")
+    public String bar() {
         return themeService.bar();
     }
 }

@@ -8,8 +8,10 @@ import lombok.Setter;
 @Setter
 public class MyConfigBean extends ConfigBean {
     private boolean isDarkMode;
+    private String themeName;
 
     public MyConfigBean() {
         isDarkMode = false;
+        themeName = "Default";
     }
 }
