@@ -33,36 +33,12 @@ public class PouringController {
     }
 
     @ApiEndpoint(POST = "/selectsize", desc = "selects a size")
-    public void selectSize(@RequestBody String size) {
-        pouringService.setSize(size);
+    public void selectSize(@RequestBody SelectCupRequest cup) {
+        pouringService.setSize(cup.getId());
     }
 
     @ApiEndpoint(POST = "/selectbeverage", desc = "selects a beverage")
-    public void selectBeverage(@RequestBody Beverage beverage) {
-        pouringService.setSelectedBeverage(beverage);
-    }
-
-    @ApiEndpoint(GET ="/beverages", desc = "beverages list")
-    public List<Beverage> beverages() {
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        final String jsonFilename = "cups.json";
-
-        try(InputStream in = getClass().getClassLoader().getResourceAsStream(jsonFilename)) {
-            log.debug("Reading json file: " + jsonFilename);
-            log.debug("in: " + in);
-
-            JsonNode jsonNode = mapper.readValue(in, JsonNode.class);
-            String jsonString = mapper.writeValueAsString(jsonNode);
-            log.info(jsonString);
-
-            List<Beverage> beverages = mapper.readValue(jsonString, new TypeReference<List<Beverage>>() {});
-            return beverages;
-        }
-        catch(Exception e) {
-            log.error("Error reading json file: " + jsonFilename);
-            throw new RuntimeException(e);
-        }
+    public void selectBeverage(@RequestBody SelectBeverageRequest beverage) {
+        pouringService.setSelectedBeverage(beverage.getId());
     }
 }
