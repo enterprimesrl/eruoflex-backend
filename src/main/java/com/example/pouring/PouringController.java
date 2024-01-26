@@ -22,7 +22,7 @@ public class PouringController {
     private PouringService pouringService;
 
     @ApiEndpoint(POST = "/start", desc = "starts a pour")
-    public FutureWork start() {
+    public FutureWork start() throws InterruptedException {
        FutureWork fw = pouringService.startPouring();
        return fw;
     }

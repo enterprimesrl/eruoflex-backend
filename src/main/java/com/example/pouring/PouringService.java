@@ -18,18 +18,23 @@ public class PouringService extends AbstractConfigurableService<PouringConfig> {
     BeverageService beverageService;
     CupService cupService;
 
-    public FutureWork startPouring() {
-        currentFw = new FutureWork("start-pour", (f) -> {
 
-            session = new PouringSession();
+    public FutureWork startPouring() throws InterruptedException {
+        currentFw = new FutureWork("startPour", (f) -> {
+            do {
+                session.setVolumePoured(session.getVolumePoured() + session.getCup().getDefaultRate());
+                Thread.sleep(1000);
+            } while (session.getVolumePoured() < session.getCup().getVolume());
             f.success();
-        }, 3000);
+        }, getPourTime());
 
+        currentFw.setInterruptable(true);
+        currentFw.getClientData().setData(session);
         return currentFw;
     }
 
     public void stopPouring() {
-        currentFw.cancel("stop pouring");
+        currentFw.cancel("stopPouring");
     }
 
     public void setSize(String s) {
@@ -64,5 +69,16 @@ public class PouringService extends AbstractConfigurableService<PouringConfig> {
                 .findFirst();
 
         selectedBeverage.ifPresent((bev) -> session.setBeverage(bev));
+    }
+    
+    private int getPourTime() {
+        double volumePoured = session.getVolumePoured();
+        int totalVolumeToPour = session.getCup().getVolume();
+        if (volumePoured >= totalVolumeToPour) {
+            return 0;
+        }
+
+        double volumeToPour = totalVolumeToPour - volumePoured;
+        return (int) (volumeToPour / session.getCup().getDefaultRate()) * 1000;
     }
 }

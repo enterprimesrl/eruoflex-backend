@@ -8,5 +8,9 @@ import lombok.Data;
 public class PouringSession {
     private Beverage beverage;
     private Cup cup;
-    private Double volumePoured = 0.0;
+    private double volumePoured = 0.0;
+
+    public int getMaxPouringTime() {
+        return (int) (cup.getVolume() / cup.getDefaultRate()) * 1000;
+    }
 }

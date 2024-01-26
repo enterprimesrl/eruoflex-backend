@@ -29,4 +29,18 @@ public class CupService extends AbstractService {
             throw new RuntimeException(e);
         }
     }
+
+
+    public int getVolume(String key) {
+//        cups.forEach(cup -> {
+//            if (cup.getKey().equals(key)) {
+//                return cup.getVolume();
+//            }
+//        });
+
+
+
+
+        throw new RuntimeException("Cup not found: " + key);
+    }
 }
