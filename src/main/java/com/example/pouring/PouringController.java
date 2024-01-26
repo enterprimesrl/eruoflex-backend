@@ -5,9 +5,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tccc.kos.commons.core.context.annotations.Autowired;
+import com.tccc.kos.commons.core.dispatcher.HttpResponse;
 import com.tccc.kos.commons.core.dispatcher.annotations.ApiController;
 import com.tccc.kos.commons.core.dispatcher.annotations.ApiEndpoint;
 import com.tccc.kos.commons.core.dispatcher.annotations.RequestBody;
+import com.tccc.kos.commons.core.dispatcher.exceptions.NotFoundException;
 import com.tccc.kos.commons.util.concurrent.future.FutureWork;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,12 +35,24 @@ public class PouringController {
     }
 
     @ApiEndpoint(POST = "/selectsize", desc = "selects a size")
-    public void selectSize(@RequestBody SelectCupRequest cup) {
-        pouringService.setSize(cup.getId());
+    public PouringSession selectSize(HttpResponse httpResponse, @RequestBody SelectCupRequest cup) {
+        try {
+            PouringSession session = pouringService.setSize(cup.getId());
+            return session;
+        } catch (NotFoundException e) {
+            httpResponse.setStatus(404);
+        }
+
+        return null;
     }
 
     @ApiEndpoint(POST = "/selectbeverage", desc = "selects a beverage")
-    public void selectBeverage(@RequestBody SelectBeverageRequest beverage) {
-        pouringService.setSelectedBeverage(beverage.getId());
+    public void selectBeverage(HttpResponse httpResponse, @RequestBody SelectBeverageRequest beverage) {
+        try {
+            pouringService.setSelectedBeverage(beverage.getId());
+        } catch (NotFoundException e) {
+            httpResponse.setStatus(404);
+        }
+
     }
 }
