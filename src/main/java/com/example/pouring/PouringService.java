@@ -10,8 +10,6 @@ import com.tccc.kos.commons.core.service.AbstractConfigurableService;
 import com.tccc.kos.commons.util.concurrent.future.FutureWork;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Optional;
-
 @Slf4j
 public class PouringService extends AbstractConfigurableService<PouringConfig> {
     FutureWork currentFw;
@@ -44,56 +42,40 @@ public class PouringService extends AbstractConfigurableService<PouringConfig> {
         log.info("Stop Pouring: " + session.getVolumePoured() + " of " + session.getCup().getVolume());
     }
 
-    public PouringSession setSize(String s) {
-        log.info("PouringService.setSize: " + s);
-        if (session.getCup() != null && !session.getCup().getKey().equals(s)) {
+    public PouringSession setCup(String cupKey) {
+        log.info("PouringService.setSize: " + cupKey);
+        if (session.getCup() != null && !session.getCup().getKey().equals(cupKey)) {
             Beverage selectedBev = session.getBeverage();
             session = new PouringSession();
             session.setBeverage(selectedBev);
         }
 
-        Optional<Cup> selectedCup = cupService
-                .getCups()
-                .stream()
-                .filter((cup) -> {
-                    return cup.getKey().equals(s);
-                })
-                .findFirst();
+        Cup selectedCup = cupService.getCup(cupKey);
+        if (selectedCup == null) {
+            log.error("cup not found. key: " + cupKey);
+            throw new NotFoundException("cup not found");
+        }
 
-        selectedCup.ifPresentOrElse(
-                (cup) -> {
-                    log.info("PouringService.selectedCup: " + cup.getVolume());
-                    session.setCup(cup);
-                },
-                () -> {
-                    log.error("PouringService.selectedCup: not found");
-                    throw new NotFoundException("Cup not found");
-                });
+        session.setCup(selectedCup);
 
         return session;
     }
 
-    public void setSelectedBeverage(String b) {
+    public void setBeverage(String beverageKey) {
         if (session.getBeverage() != null &&
-                !session.getBeverage().getId().equals(b)) {
+                !session.getBeverage().getId().equals(beverageKey)) {
             session = new PouringSession();
         }
 
-        Optional<Beverage> selectedBeverage = beverageService
-                .getBeverages()
-                .stream()
-                .filter((beverage) -> {
-                    return beverage.getId().equals(b);
-                })
-                .findFirst();
+        Beverage selectedBeverage = beverageService.getBeverage(beverageKey);
+        if (selectedBeverage == null) {
+            log.error("beverage not found. key: " + beverageKey);
+            throw new NotFoundException("beverage not found");
+        }
 
-        selectedBeverage.ifPresentOrElse(
-                (cup) -> session.setBeverage(cup),
-                () -> {
-                    throw new NotFoundException("Beverage not found");
-                });
+        session.setBeverage(selectedBeverage);
     }
-    
+
     private int getPourTime() {
         double volumePoured = session.getVolumePoured();
         int totalVolumeToPour = session.getCup().getVolume();

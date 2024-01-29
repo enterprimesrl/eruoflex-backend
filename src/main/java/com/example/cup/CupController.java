@@ -12,6 +12,7 @@ import java.util.List;
 public class CupController {
     @Autowired
     private CupService cupService;
+
     @ApiEndpoint(GET = "/", desc = "cup list")
     public List<Cup> cups() {
         return cupService.getCups();
