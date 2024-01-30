@@ -17,9 +17,15 @@ public class PouringController {
     private PouringService pouringService;
 
     @ApiEndpoint(POST = "/start", desc = "starts a pour")
-    public FutureWork start() throws InterruptedException {
-        FutureWork fw = pouringService.startPouring();
-        return fw;
+    public FutureWork start(HttpResponse httpResponse) throws InterruptedException {
+        try {
+            FutureWork fw = pouringService.startPouring();
+            return fw;
+        } catch(NotFoundException e) {
+            httpResponse.setStatus(400);
+        }
+
+        return null;
     }
 
     @ApiEndpoint(POST = "/stop", desc = "stops a pour")

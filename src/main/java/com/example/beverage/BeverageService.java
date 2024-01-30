@@ -6,6 +6,7 @@ import com.tccc.kos.commons.util.KosUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class BeverageService extends AbstractService {
     @Getter
     private List<Beverage> beverages;
 
-    private Map<String, Beverage> beveragesMap;
+    private Map<String, Beverage> beveragesMap = new HashMap<>();
 
     public BeverageService() {
         String JSON_FILENAME = "beverages.json";

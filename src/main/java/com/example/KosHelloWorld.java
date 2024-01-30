@@ -6,7 +6,6 @@ import com.example.cup.CupController;
 import com.example.cup.CupService;
 import com.example.pouring.PouringController;
 import com.example.pouring.PouringService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tccc.kos.core.service.app.BaseAppConfig;
 import com.tccc.kos.core.service.app.SystemApplication;
 import lombok.extern.slf4j.Slf4j;
@@ -15,11 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class KosHelloWorld extends SystemApplication<BaseAppConfig> {
     @Override
-    public void load() throws JsonProcessingException {
+    public void load() {
         log.info("Load");
-        getCtx().add(new MyController());
-        getCtx().add(new ThemeService());
-
         getCtx().add(new PouringController());
         getCtx().add(new PouringService());
 
@@ -31,7 +27,7 @@ public class KosHelloWorld extends SystemApplication<BaseAppConfig> {
     }
 
     @Override
-    public void start(){
+    public void start() {
         log.info("Start");
     }
 
@@ -50,8 +46,5 @@ public class KosHelloWorld extends SystemApplication<BaseAppConfig> {
     public void unload() throws Exception {
         log.info("unload");
         super.unload();
-    }
-
-    public static void main(String[] args) {
     }
 }

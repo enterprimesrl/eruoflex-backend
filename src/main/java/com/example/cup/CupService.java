@@ -6,6 +6,7 @@ import com.tccc.kos.commons.util.KosUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,12 +15,12 @@ public class CupService extends AbstractService {
 
     @Getter
     private List<Cup> cups;
-    private Map<String, Cup> cupsMap;
+    private Map<String, Cup> cupsMap = new HashMap<>();
 
     public CupService() {
         String JSON_FILENAME = "cups.json";
         try {
-            cups = KosUtil.getMapper().readValue(JSON_FILENAME, new TypeReference<List<Cup>>() {
+            cups = KosUtil.getMapper().readValue(getClass().getClassLoader().getResourceAsStream(JSON_FILENAME), new TypeReference<List<Cup>>() {
             });
 
             cups.stream().forEach((Cup cup) -> {
